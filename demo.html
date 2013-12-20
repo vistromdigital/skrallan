@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Skrållan Demo</title>
+	<style>
+		body {
+			height: 2000px;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		}
+
+		#scroll-output {
+			position: fixed;
+			font-size: 5em;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<output id="scroll-output"></output>
+
+	<script src="skrallan.js"></script>
+	<script>
+		window.addEventListener('scrollupstart', onScrollUp, false);
+		window.addEventListener('scrolldownstart', onScrollDown, false);
+
+		function onScrollUp(event) {
+			document.querySelector('#scroll-output').innerHTML = 'Scrolling up';
+		}
+
+		function onScrollDown(event) {
+			document.querySelector('#scroll-output').innerHTML = 'Scrolling down';
+		}
+	</script>
+</body>
+</html>
