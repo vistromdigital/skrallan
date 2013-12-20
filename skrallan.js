@@ -29,6 +29,11 @@
 		scrollUpStartEvent.initEvent('scrollupstart', true, true);
 	}
 
+	/**
+	 * Trigger additional scroll events.
+	 *
+	 * @param Event  event  The original scroll event
+	 */
 	function onScroll(event) {
 		currentOffset = window.pageYOffset;
 
