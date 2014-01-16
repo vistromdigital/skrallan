@@ -6,6 +6,7 @@
 	<style>
 		body {
 			height: 2000px;
+			width: 2000px;
 			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 		}
 
@@ -23,6 +24,8 @@
 	<script>
 		window.addEventListener('scrollupstart', onScrollUp, false);
 		window.addEventListener('scrolldownstart', onScrollDown, false);
+		window.addEventListener('scrollleftstart', onScrollLeft, false);
+		window.addEventListener('scrollrightstart', onScrollRight, false);
 
 		function onScrollUp(event) {
 			document.querySelector('#scroll-output').innerHTML = 'Scrolling up';
@@ -30,6 +33,14 @@
 
 		function onScrollDown(event) {
 			document.querySelector('#scroll-output').innerHTML = 'Scrolling down';
+		}
+
+		function onScrollLeft(event) {
+			document.querySelector('#scroll-output').innerHTML = 'Scrolling left';
+		}
+
+		function onScrollRight(event) {
+			document.querySelector('#scroll-output').innerHTML = 'Scrolling right';
 		}
 	</script>
 </body>
