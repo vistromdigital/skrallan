@@ -1,5 +1,6 @@
 (function () {
-	var currentDirection,
+	var currentYDirection,
+		currentXDirection,
 		currentYOffset,
 		currentXOffset,
 		previousYDirection,
