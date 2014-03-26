@@ -9,46 +9,31 @@
 		previousXDirection,
 		previousYOffset = window.pageYOffset,
 		previousXOffset = window.pageXOffset,
-		scrollDownEvent,
-		scrollUpEvent,
-		scrollLeftEvent,
-		scrollRightEvent,
-		scrollDownStartEvent,
-		scrollUpStartEvent,
-		scrollLeftStartEvent,
-		scrollRightStartEvent;
+		events = {},
+		eventNames = [
+			'scrolldown',
+			'scrollup',
+			'scrollleft',
+			'scrollright',
+			'scrolldownstart',
+			'scrollupstart',
+			'scrollleftstart',
+			'scrollrightstart'
+		];
 
 	// Initialize events
 	try {
-		scrollDownEvent = new Event('scrolldown');
-		scrollUpEvent = new Event('scrollup');
-		scrollLeftEvent = new Event('scrollleft');
-		scrollRightEvent = new Event('scrollright');
-		scrollDownStartEvent = new Event('scrolldownstart');
-		scrollUpStartEvent = new Event('scrollupstart');
-		scrollLeftStartEvent = new Event('scrollleftstart');
-		scrollRightStartEvent = new Event('scrollrightstart');
+		for (var i = 0; i < eventNames.length; i++) {
+			events[eventNames[i]] = new Event(eventNames[i]);
+		}
 	} catch (e) {
 		// No browser support for Event constructor, use
 		// the old-fashioned way :(
 
-		scrollDownEvent = document.createEvent('Event');
-		scrollUpEvent = document.createEvent('Event');
-		scrollLeftEvent = document.createEvent('Event');
-		scrollRightEvent = document.createEvent('Event');
-		scrollDownStartEvent = document.createEvent('Event');
-		scrollUpStartEvent = document.createEvent('Event');
-		scrollLeftStartEvent = document.createEvent('Event');
-		scrollRightStartEvent = document.createEvent('Event');
-
-		scrollDownEvent.initEvent('scrolldown', true, true);
-		scrollUpEvent.initEvent('scrollup', true, true);
-		scrollLeftEvent.initEvent('scrollleft', true, true);
-		scrollRightEvent.initEvent('scrollright', true, true);
-		scrollDownStartEvent.initEvent('scrolldownstart', true, true);
-		scrollUpStartEvent.initEvent('scrollupstart', true, true);
-		scrollLeftStartEvent.initEvent('scrollleftstart', true, true);
-		scrollRightStartEvent.initEvent('scrollrightstart', true, true);
+		for (var i = 0; i < eventNames.length; i++) {
+			events[eventNames[i]] = document.createEvent('Event');
+			events[eventNames[i]].initEvent(eventNames[i], true, true);
+		}
 	}
 
 	/**
@@ -81,31 +66,31 @@
 		// Has the scroll direction changed since the last scroll? (Y-axis)
 		if (currentYDirection !== previousYDirection) {
 			if (currentYDirection === 'up') {
-				window.dispatchEvent(scrollUpStartEvent);
+				window.dispatchEvent(events['scrollupstart']);
 			} else if (currentYDirection === 'down') {
-				window.dispatchEvent(scrollDownStartEvent);
+				window.dispatchEvent(events['scrolldownstart']);
 			}
 		}
 
 		// Has the scroll direction changed since the last scroll? (X-axis)
 		if (currentXDirection !== previousXDirection) {
 			if (currentXDirection === 'left') {
-				window.dispatchEvent(scrollLeftStartEvent);
+				window.dispatchEvent(events['scrollleftstart']);
 			} else if (currentXDirection === 'right') {
-				window.dispatchEvent(scrollRightStartEvent);
+				window.dispatchEvent(events['scrollrightstart']);
 			}
 		}
 
 		if (currentYDirection === 'up') {
-			window.dispatchEvent(scrollUpEvent);
+			window.dispatchEvent(events['scrollup']);
 		} else if (currentYDirection === 'down') {
-			window.dispatchEvent(scrollDownEvent);
+			window.dispatchEvent(events['scrolldown']);
 		}
 
 		if (currentXDirection === 'left') {
-			window.dispatchEvent(scrollLeftEvent);
+			window.dispatchEvent(events['scrollleft']);
 		} else if (currentXDirection === 'down') {
-			window.dispatchEvent(scrollRightEvent);
+			window.dispatchEvent(events['scrollright']);
 		}
 
 		previousYDirection = currentYDirection;
