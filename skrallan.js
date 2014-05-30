@@ -89,7 +89,7 @@
 
 		if (currentXDirection === 'left') {
 			window.dispatchEvent(events['scrollleft']);
-		} else if (currentXDirection === 'down') {
+		} else if (currentXDirection === 'right') {
 			window.dispatchEvent(events['scrollright']);
 		}
 
